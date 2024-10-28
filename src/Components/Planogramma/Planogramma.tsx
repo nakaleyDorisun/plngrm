@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
 import { SearchInput } from "../SearchInput/SearchInput";
-import { NotFound } from "../../UI/NotFound";
+import { Warning } from "../../UI/Warning";
 
 export const Planogramma = () => {
   const selector = useAppSelector((state) => state);
@@ -61,7 +61,7 @@ export const Planogramma = () => {
               </li>
             ))
           ) : (
-            <NotFound />
+            <Warning>Введите название</Warning>
           )}
         </div>
       ) : null}

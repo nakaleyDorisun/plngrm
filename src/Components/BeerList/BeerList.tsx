@@ -5,7 +5,7 @@ import { AddBeer } from "./AddBeer/AddBeer";
 
 import s from "./BeerList.module.css";
 import { Link } from "react-router-dom";
-import { NotFound } from "../../UI/NotFound";
+import { Warning } from "../../UI/Warning";
 
 export const BeerList = () => {
   const [showAll, setShowAll] = useState(false);
@@ -14,6 +14,8 @@ export const BeerList = () => {
   const selector = useAppSelector((state) => state);
   const beers = selector.beersStore.beers;
   const isMatch = selector.beersStore.isMatch;
+
+  const isBeerListShowed = beers && showAll && isMatch;
 
   const dispatch = useAppDispatch();
 
@@ -42,7 +44,7 @@ export const BeerList = () => {
           <button onClick={() => dispatch(refreshInStock())}>
             Обновить ассортимент
           </button>
-          {beers && showAll && isMatch ? (
+          {isBeerListShowed ? (
             beers.map((beer) => (
               <div key={beer.id}>
                 {beer.title}
@@ -56,7 +58,7 @@ export const BeerList = () => {
               </div>
             ))
           ) : !isMatch ? (
-            <NotFound />
+            <Warning>Не найдено</Warning>
           ) : null}
         </div>
         <AddBeer />

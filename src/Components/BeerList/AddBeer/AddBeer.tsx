@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { addBeer } from "../../../store/beersSlice";
 import { Warning } from "../../../UI/Warning";
+import { ButtonDefault } from "../../../UI/ButtonDefault";
 
 export const AddBeer = () => {
   const [addBeerValue, setAddBeerValue] = useState("");
@@ -30,7 +31,10 @@ export const AddBeer = () => {
           setAllowAddBeer(true);
         }}
       />
-      <button onClick={addBeerHandler}>Добавить новую позицию</button>
+      <ButtonDefault onClick={addBeerHandler}>
+        Добавить новую позицию
+      </ButtonDefault>
+
       <div>{allowAddBeer ? null : <Warning>Введите название</Warning>}</div>
     </div>
   );

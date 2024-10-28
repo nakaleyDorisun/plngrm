@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
 import { SearchInput } from "../SearchInput/SearchInput";
 import { Warning } from "../../UI/Warning";
+import { ButtonSearch } from "../../UI/ButtonSearch";
+import { ButtonDefault } from "../../UI/ButtonDefault";
 
 export const Planogramma = () => {
   const selector = useAppSelector((state) => state);
@@ -24,6 +26,11 @@ export const Planogramma = () => {
     }
   };
 
+  const addBeerToPlanogrammHandler = (title: string) => {
+    setValue(title);
+    setIsChecked(false);
+  };
+
   useEffect(() => {
     if (!currentData.some((beer) => beer.title === value)) {
       setValue("");
@@ -35,9 +42,11 @@ export const Planogramma = () => {
       <div style={{ display: "flex" }}>
         <div>
           {isChecked || isData ? (
-            <button onClick={chooseBeerHandler}>...</button>
+            <ButtonSearch onClick={chooseBeerHandler} />
           ) : (
-            <button onClick={chooseBeerHandler}>нет данных</button>
+            <ButtonDefault onClick={chooseBeerHandler}>
+              Нет данных
+            </ButtonDefault>
           )}
         </div>
         <div>{currentData.length ? value : null}</div>
@@ -50,14 +59,11 @@ export const Planogramma = () => {
             currentData.map((b) => (
               <li key={b.id} style={{ display: "flex" }}>
                 <p>{b.title}</p>
-                <button
-                  onClick={() => {
-                    setValue(b.title);
-                    setIsChecked(false);
-                  }}
+                <ButtonDefault
+                  onClick={() => addBeerToPlanogrammHandler(b.title)}
                 >
                   Add
-                </button>
+                </ButtonDefault>
               </li>
             ))
           ) : (

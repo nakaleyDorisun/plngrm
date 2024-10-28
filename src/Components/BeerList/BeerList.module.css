@@ -1,0 +1,6 @@
+.wrp {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 50px;
+  border-bottom: 1px white solid;
+}

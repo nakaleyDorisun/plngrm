@@ -34,7 +34,7 @@ const beersSlice = createSlice({
       state.modifiedBeers = filteredBeers;
     },
     start: (state) => {
-      state.beers = beers;
+      if (!state.beers.length) state.beers = beers;
     },
     addBeer: (state, action: PayloadAction<string>) => {
       const newBeer = { id: uuid(), title: action.payload, isInStock: true };

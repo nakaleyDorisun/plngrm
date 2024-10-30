@@ -16,7 +16,7 @@ export const Planogramma = () => {
   const currentData = originalData ? originalData : modifiedData;
 
   const [isChecked, setIsChecked] = useState(false);
-  const [value, setValue] = useState("");
+  const [beerOnPlanogramm, setBeerOnPlanogramm] = useState("");
 
   const correctData = originalData.length ? originalData : modifiedData;
 
@@ -27,13 +27,13 @@ export const Planogramma = () => {
   };
 
   const addBeerToPlanogrammHandler = (title: string) => {
-    setValue(title);
+    setBeerOnPlanogramm(title);
     setIsChecked(false);
   };
 
   useEffect(() => {
-    if (!currentData.some((beer) => beer.title === value)) {
-      setValue("");
+    if (!currentData.some((beer) => beer.title === beerOnPlanogramm)) {
+      setBeerOnPlanogramm("");
     }
   }, [originalData, modifiedData]);
 
@@ -49,7 +49,7 @@ export const Planogramma = () => {
             </ButtonDefault>
           )}
         </div>
-        <div>{currentData.length ? value : null}</div>
+        <div>{currentData.length ? beerOnPlanogramm : null}</div>
       </div>
 
       {isChecked ? (
@@ -57,12 +57,12 @@ export const Planogramma = () => {
           <SearchInput />
           {isMatch ? (
             currentData.map((b) => (
-              <li key={b.id} style={{ display: "flex" }}>
-                <p>{b.title}</p>
+              <li key={b.id} style={{ display: "flex", alignItems: "center" }}>
+                <p style={{ margin: "0" }}>{b.title}</p>
                 <ButtonDefault
                   onClick={() => addBeerToPlanogrammHandler(b.title)}
                 >
-                  Add
+                  +
                 </ButtonDefault>
               </li>
             ))

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { addBeer } from "../../../store/beersSlice";
 import { Warning } from "../../../UI/Warning";
 import { ButtonDefault } from "../../../UI/ButtonDefault";
+import { Input } from "antd";
 
 export const AddBeer = () => {
   const [addBeerValue, setAddBeerValue] = useState("");
@@ -23,7 +24,7 @@ export const AddBeer = () => {
   const dispatch = useAppDispatch();
   return (
     <div>
-      <input
+      <Input
         type="text"
         value={addBeerValue}
         onChange={(e) => {

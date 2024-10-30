@@ -27,13 +27,17 @@ export const Pagination: FC<IProps> = ({
     }
   };
 
+  if (totalItems < itemsPerPage) {
+    handleChangePage(1);
+  }
+
   return (
     <div>
       <button onClick={handlePrevPage} disabled={currentPage === 1}>
         Previous
       </button>
       <span>
-        Page {currentPage} of {totalPages}
+        Page {currentPage} of {totalPages === 0 ? 1 : totalPages}
       </span>
       <button onClick={handleNextPage} disabled={currentPage === totalPages}>
         Next

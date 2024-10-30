@@ -9,11 +9,8 @@ import { ThemeContext } from "../../context/NightTheme";
 export const Header = () => {
   const selector = useAppSelector((state) => state);
   const themeContext = useContext(ThemeContext);
-  const nightTheme = JSON.parse(localStorage.getItem("nightTheme") || "");
-  console.log(nightTheme, "night");
 
-  // const isNight = themeContext?.theme ? `${s.wrp} + '' + ${s.nght}` : s.wrp;
-  const isNight = nightTheme ? `${s.wrp} + '' + ${s.nght}` : s.wrp;
+  const isNight = themeContext?.theme ? `${s.wrp} + '' + ${s.nght}` : s.wrp;
 
   const beers = selector.beersStore.beers;
 

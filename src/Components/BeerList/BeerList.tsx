@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { isInStockChange, refreshInStock, start } from "../../store/beersSlice";
 import { AddBeer } from "./AddBeer/AddBeer";
@@ -9,11 +9,12 @@ import { Warning } from "../../UI/Warning";
 import { ButtonDefault } from "../../UI/ButtonDefault";
 import { Pagination } from "../Pagination/Pagination";
 import { IBeers } from "../../../data/data";
+import { ThemeContext } from "../../context/NightTheme";
 
 export const BeerList = () => {
   const selector = useAppSelector((state) => state);
   const beers = selector.beersStore.beers;
-  if (beers.length) localStorage.setItem("beers", JSON.stringify(beers));
+  const themeContext = useContext(ThemeContext);
 
   const [showAll, setShowAll] = useState(false);
 
@@ -29,6 +30,7 @@ export const BeerList = () => {
   const isBeerListShowed = beers && showAll && isMatch;
   const isInStockChangeHandler = (id: string) => dispatch(isInStockChange(id));
   const isShowed = !buttonValue ? "Показать" : "Скрыть";
+  const isNight = themeContext?.theme ? `${s.wrp} + '' + ${s.nght}` : s.wrp;
 
   const dispatch = useAppDispatch();
 
@@ -57,7 +59,7 @@ export const BeerList = () => {
 
   return (
     <>
-      <div className={s.wrp}>
+      <div className={isNight}>
         <div>
           <ButtonDefault onClick={showAllHandler}>{isShowed}</ButtonDefault>
           <ButtonDefault onClick={refreshStockHandler}>
@@ -86,12 +88,11 @@ export const BeerList = () => {
             currentPage={currentPage}
             handleChangePage={handleChangePage}
           />
+          <Link to={"/onestoreref"}>Один холодильник</Link>
+          <Link to={"/twostoreref"}>Два холодильника</Link>
         </div>
         <AddBeer />
       </div>
-
-      <Link to={"/onestoreref"}>Один холодильник</Link>
-      <Link to={"/twostoreref"}>Два холодильника</Link>
     </>
   );
 };

@@ -12,8 +12,12 @@ type IProprs = {
 };
 
 export const ThemeContextProvider = ({ children }: IProprs) => {
-  const [theme, setTheme] = useState(false);
-  localStorage.setItem("nightTheme", JSON.stringify(theme));
+  let initialState = localStorage.getItem("theme")
+    ? JSON.parse(localStorage.getItem("theme") || "")
+    : false;
+  const [theme, setTheme] = useState(initialState);
+
+  localStorage.setItem("theme", JSON.stringify(theme));
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

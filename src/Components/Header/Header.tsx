@@ -18,6 +18,7 @@ export const Header = () => {
     <div className={isNight}>
       <h2>Планограмма ПД</h2>
       <div>Всего номенклатур в ассортименте: {beers.length}</div>
+      <span>Это Ночная тема Коберник ----{">"} </span>
       <SwitchTheme
         onChange={() => {
           themeContext?.setTheme((p) => !p);
